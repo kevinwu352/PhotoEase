@@ -13,6 +13,18 @@ struct PhotoAppView: View {
             Text("run")
         }
         .navigationTitle("Photo App")
+        .navigationDestination(for: Route.self) {
+            switch $0 {
+            case .list:
+                PhotoListView()
+            }
+        }
+    }
+}
+
+extension PhotoAppView {
+    enum Route {
+        case list
     }
 }
 

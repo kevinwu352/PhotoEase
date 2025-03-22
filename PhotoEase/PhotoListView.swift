@@ -22,6 +22,12 @@ struct PhotoListView: View {
         .background(Color.white)
         .environment(\.defaultMinListRowHeight, 80)
         .navigationTitle("Photo List")
+        .navigationDestination(for: Route.self) {
+            switch $0 {
+            case let .detail(photo):
+                PhotoDetailView(photo: photo, vm: vm)
+            }
+        }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("", systemImage: vm.showFavoriteOnly ? "star.fill" : "star") {
@@ -30,7 +36,23 @@ struct PhotoListView: View {
             }
         }
     }
+}
 
+extension PhotoListView {
+    enum Route: Equatable, Hashable {
+        case detail(_ photo: Photo)
+        var name: String {
+            switch self {
+            case .detail: return "detail"
+            }
+        }
+        static func == (lhs: Self, rhs: Self) -> Bool {
+            lhs.name == rhs.name
+        }
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(name)
+        }
+    }
 }
 
 #Preview {

@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct PhotoDetailView: View {
-
-    var photo: Photo
+    @State var photo: Photo
+    @ObservedObject var vm: PhotoListViewModel
 
     var body: some View {
         VStack(spacing: 20) {
@@ -30,6 +30,8 @@ struct PhotoDetailView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("", systemImage: photo.favorite ? "star.fill" : "star") {
+                    photo.favorite.toggle()
+                    vm.photoFavorite(photo)
                 }
             }
         }
@@ -38,7 +40,8 @@ struct PhotoDetailView: View {
 }
 
 #Preview {
-    PhotoDetailView(photo:
-            .init(albumId: 1, id: 1, title: "ttl", url: "url1", thumbnailUrl: "url2")
+    PhotoDetailView(
+        photo: .init(albumId: 1, id: 1, title: "ttl", url: "url1", thumbnailUrl: "url2"),
+        vm: .init()
     )
 }
