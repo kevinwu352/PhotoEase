@@ -15,8 +15,11 @@ struct PhotoDetailView: View {
         Text(photo.title)
             .navigationTitle("Photo Detail")
     }
+
 }
 
 #Preview {
-    PhotoDetailView(photo: .init(albumId: 1, id: 1, title: "abc", url: "", thumbnailUrl: ""))
+    PhotoDetailView(photo:
+            .init(albumId: 1, id: 1, title: "ttl", url: "url1", thumbnailUrl: "url2")
+    )
 }

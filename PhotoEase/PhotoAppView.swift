@@ -9,8 +9,13 @@ import SwiftUI
 
 struct PhotoAppView: View {
     var body: some View {
-        NavigationLink("rock", destination: PhotoListView())
-            .navigationTitle("Photo App")
+        NavigationLink(value: 1) {
+            Text("run")
+        }
+        .navigationTitle("Photo App")
+        .navigationDestination(for: Int.self) { v in
+            PhotoListView()
+        }
     }
 }
 

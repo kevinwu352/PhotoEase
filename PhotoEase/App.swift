@@ -1,5 +1,5 @@
 //
-//  PhotoEaseApp.swift
+//  App.swift
 //  PhotoEase
 //
 //  Created by Kevin Wu on 3/21/25.
@@ -14,7 +14,6 @@ struct PhotoEaseApp: App {
             NavigationStack {
                 PhotoAppView()
             }
-
         }
     }
 }

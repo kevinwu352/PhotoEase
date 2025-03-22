@@ -26,6 +26,8 @@ struct PhotoListRowView: View {
 
 }
 
-#Preview {
-    PhotoListRowView(photo: .init(albumId: 1, id: 1, title: "ttl", url: "url1", thumbnailUrl: "url2"))
+#Preview(traits: .sizeThatFitsLayout) {
+    PhotoListRowView(photo:
+            .init(albumId: 1, id: 1, title: "ttl", url: "url1", thumbnailUrl: "url2")
+    )
 }

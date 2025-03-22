@@ -19,11 +19,12 @@ struct PhotoListView: View {
         }
         .listStyle(.plain)
         .environment(\.defaultMinListRowHeight, 80)
-        .navigationTitle("Photo List")
         .navigationDestination(for: Photo.self) { photo in
-            Text(photo.title)
+            PhotoDetailView(photo: photo)
         }
+        .navigationTitle("Photo List")
     }
+
 }
 
 #Preview {
