@@ -13,15 +13,12 @@ struct PhotoListView: View {
 
     var body: some View {
         List(vm.allPhotos) { photo in
-            NavigationLink(value: photo) {
+            NavigationLink(value: Route.detail(photo)) {
                 PhotoListRowView(photo: photo)
             }
         }
         .listStyle(.plain)
         .environment(\.defaultMinListRowHeight, 80)
-        .navigationDestination(for: Photo.self) { photo in
-            PhotoDetailView(photo: photo)
-        }
         .navigationTitle("Photo List")
     }
 

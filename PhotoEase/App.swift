@@ -13,6 +13,7 @@ struct PhotoEaseApp: App {
         WindowGroup {
             NavigationStack {
                 PhotoAppView()
+                    .navigationDestination(for: Route.self) { $0.view }
             }
         }
     }
