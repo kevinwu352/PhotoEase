@@ -9,36 +9,20 @@ import SwiftUI
 
 struct PhotoListView: View {
 
+    @StateObject var vm = PhotoListViewModel()
+
     var body: some View {
-        NavigationStack {
-            List {
-                ForEach(0..<50) { i in
-                    ListCell(i: i)
-                }
+        List(vm.allPhotos) { photo in
+            NavigationLink(value: photo) {
+                PhotoListRowView(photo: photo)
             }
-            .listStyle(.plain)
-            .environment(\.defaultMinListRowHeight, 80)
-            .navigationTitle("Photo List")
         }
-        .background(Color.green)
-    }
-}
-
-struct ListCell: View {
-    var i: Int
-
-    var body: some View {
-        HStack {
-            Image(systemName: "heart.fill")
-                .frame(width: 50, height: 50)
-                .background(Color.gray)
-
-            Text("\(i) You might want to set new insets relative to the original position. In that case")
-                .lineLimit(2)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color.gray)
+        .listStyle(.plain)
+        .environment(\.defaultMinListRowHeight, 80)
+        .navigationTitle("Photo List")
+        .navigationDestination(for: Photo.self) { photo in
+            Text(photo.title)
         }
-        .listRowBackground(Color.clear)
     }
 }
 
