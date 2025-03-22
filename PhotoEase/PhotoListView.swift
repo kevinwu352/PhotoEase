@@ -16,8 +16,10 @@ struct PhotoListView: View {
             NavigationLink(value: Route.detail(photo)) {
                 PhotoListRowView(photo: photo)
             }
+            .listRowBackground(Color.clear)
         }
         .listStyle(.plain)
+        .background(Color.white)
         .environment(\.defaultMinListRowHeight, 80)
         .navigationTitle("Photo List")
         .toolbar {

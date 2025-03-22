@@ -113,8 +113,8 @@ extension PhotoListViewModel {
             .store(in: &cancellables)
     }
 
-    func toggleFavorite(_ id: Int?) {
-        if let i = allPhotos.firstIndex(where: { $0.id == id }) {
+    func photoFavorite(_ photo: Photo?) {
+        if let i = allPhotos.firstIndex(where: { $0.id == photo?.id }) {
             allPhotos[i].favorite.toggle()
         }
     }
