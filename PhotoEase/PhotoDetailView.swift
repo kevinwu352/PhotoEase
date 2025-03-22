@@ -11,6 +11,8 @@ struct PhotoDetailView: View {
     @State var photo: Photo
     @ObservedObject var vm: PhotoListViewModel
 
+    @State var showUnfavoriteAlert = false
+
     var body: some View {
         VStack(spacing: 20) {
             AsyncImage(url: photo.url.url) {
@@ -29,14 +31,27 @@ struct PhotoDetailView: View {
         .navigationTitle("Photo Detail")
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Button("", systemImage: photo.favorite ? "star.fill" : "star") {
-                    photo.favorite.toggle()
-                    vm.photoFavorite(photo)
-                }
+                Button("", systemImage: photo.favorite ? "star.fill" : "star", action: photoFavorite)
             }
+        }
+        .alert("Are you sure to dislike this photo?", isPresented: $showUnfavoriteAlert) {
+            Button("Cancel", role: .cancel) { }
+            Button("Sure", role: .destructive, action: doPhotoFavorite)
+        } message: { }
+    }
+
+    func photoFavorite() {
+        if photo.favorite {
+            showUnfavoriteAlert = true
+        } else {
+            doPhotoFavorite()
         }
     }
 
+    func doPhotoFavorite() {
+        photo.favorite.toggle()
+        vm.photoFavorite(photo)
+    }
 }
 
 #Preview {

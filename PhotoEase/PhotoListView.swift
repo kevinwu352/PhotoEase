@@ -41,17 +41,6 @@ struct PhotoListView: View {
 extension PhotoListView {
     enum Route: Equatable, Hashable {
         case detail(_ photo: Photo)
-        var name: String {
-            switch self {
-            case .detail: return "detail"
-            }
-        }
-        static func == (lhs: Self, rhs: Self) -> Bool {
-            lhs.name == rhs.name
-        }
-        func hash(into hasher: inout Hasher) {
-            hasher.combine(name)
-        }
     }
 }
 
