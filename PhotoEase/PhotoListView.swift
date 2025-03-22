@@ -12,7 +12,7 @@ struct PhotoListView: View {
     @StateObject var vm = PhotoListViewModel()
 
     var body: some View {
-        List(vm.allPhotos) { photo in
+        List(vm.photoList) { photo in
             NavigationLink(value: Route.detail(photo)) {
                 PhotoListRowView(photo: photo)
             }
@@ -20,10 +20,19 @@ struct PhotoListView: View {
         .listStyle(.plain)
         .environment(\.defaultMinListRowHeight, 80)
         .navigationTitle("Photo List")
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button("", systemImage: vm.showFavoriteOnly ? "star.fill" : "star") {
+                    vm.showFavoriteOnly.toggle()
+                }
+            }
+        }
     }
 
 }
 
 #Preview {
-    PhotoListView()
+    NavigationStack {
+        PhotoListView()
+    }
 }
