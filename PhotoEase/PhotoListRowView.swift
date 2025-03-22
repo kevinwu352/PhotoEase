@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PhotoListRowView: View {
     var photo: Photo
+    @ObservedObject var vm: PhotoListViewModel
 
     var body: some View {
         HStack {
@@ -31,15 +32,18 @@ struct PhotoListRowView: View {
                 }
 
             Button("", systemImage: photo.favorite ? "star.fill" : "star") {
+                vm.photoFavorite(photo)
             }
             .foregroundStyle(Color.black)
+            .buttonStyle(.plain)
         }
     }
 
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    PhotoListRowView(photo:
-            .init(albumId: 1, id: 1, title: "ttl", url: "url1", thumbnailUrl: "url2")
+    PhotoListRowView(
+        photo: .init(albumId: 1, id: 1, title: "ttl", url: "url1", thumbnailUrl: "url2"),
+        vm: .init()
     )
 }

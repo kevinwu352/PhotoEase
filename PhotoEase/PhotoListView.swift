@@ -14,7 +14,7 @@ struct PhotoListView: View {
     var body: some View {
         List(vm.photoList) { photo in
             NavigationLink(value: Route.detail(photo)) {
-                PhotoListRowView(photo: photo)
+                PhotoListRowView(photo: photo, vm: vm)
             }
             .listRowBackground(Color.clear)
         }
