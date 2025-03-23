@@ -35,6 +35,7 @@ struct PhotoListView: View {
                 }
             }
         }
+        .searchable(text: $vm.searchText)
     }
 }
 

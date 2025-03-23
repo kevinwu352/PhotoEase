@@ -43,10 +43,8 @@ class PhotoListViewModel: ObservableObject {
     @Published var allPhotos: [Photo] = []
 
     @Published var showFavoriteOnly = false
+    @Published var searchText = ""
     @Published var photoList: [Photo] = []
-
-    @Published var searchText: String?
-    @Published var filteredList: [Photo] = []
 
     init() {
         bindData()
@@ -73,16 +71,16 @@ extension PhotoListViewModel {
             .dropFirst()
             .combineLatest($searchText)
             .sink { [weak self] list, text in
-                if let text = text, !text.isEmpty {
+                if text.isEmpty {
+                    self?.photoList = list
+                } else {
                     let text = text
                         .lowercased()
                         .trimmingCharacters(in: .whitespacesAndNewlines)
-                    self?.filteredList = list
+                    self?.photoList = list
                         .filter {
                             $0.title.lowercased().contains(text)
                         }
-                } else {
-                    self?.filteredList = list
                 }
             }
             .store(in: &cancellables)
