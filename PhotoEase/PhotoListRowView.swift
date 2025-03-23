@@ -31,8 +31,8 @@ struct PhotoListRowView: View {
                     $0[.leading]
                 }
 
-            Button("", systemImage: photo.favorite ? "star.fill" : "star") {
-                vm.photoFavorite(photo)
+            Button("", systemImage: photo.favorited ? "star.fill" : "star") {
+                vm.favoritePhoto(photo)
             }
             .foregroundStyle(Color.black)
             .buttonStyle(.plain)

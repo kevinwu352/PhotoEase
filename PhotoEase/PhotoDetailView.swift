@@ -31,26 +31,26 @@ struct PhotoDetailView: View {
         .navigationTitle("Photo Detail")
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Button("", systemImage: photo.favorite ? "star.fill" : "star", action: photoFavorite)
+                Button("", systemImage: photo.favorited ? "star.fill" : "star", action: favoritePhoto)
             }
         }
         .alert("Are you sure to dislike this photo?", isPresented: $showUnfavoriteAlert) {
             Button("Cancel", role: .cancel) { }
-            Button("Sure", role: .destructive, action: doPhotoFavorite)
+            Button("Sure", role: .destructive, action: doFavoritePhoto)
         } message: { }
     }
 
-    func photoFavorite() {
-        if photo.favorite {
+    func favoritePhoto() {
+        if photo.favorited {
             showUnfavoriteAlert = true
         } else {
-            doPhotoFavorite()
+            doFavoritePhoto()
         }
     }
 
-    func doPhotoFavorite() {
-        photo.favorite.toggle()
-        vm.photoFavorite(photo)
+    func doFavoritePhoto() {
+        photo.favorited.toggle()
+        vm.favoritePhoto(photo)
     }
 }
 

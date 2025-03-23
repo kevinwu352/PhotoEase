@@ -22,7 +22,7 @@ struct Photo: Codable, Hashable, Identifiable {
     var url: String
     var thumbnailUrl: String
 
-    var favorite = false
+    var favorited = false
 
     enum CodingKeys: CodingKey {
         case albumId
@@ -62,7 +62,7 @@ extension PhotoListViewModel {
             .combineLatest($showFavoriteOnly)
             .sink { [weak self] list, show in
                 if show {
-                    self?.photoList = list.filter { $0.favorite }
+                    self?.photoList = list.filter { $0.favorited }
                 } else {
                     self?.photoList = list
                 }
@@ -113,9 +113,9 @@ extension PhotoListViewModel {
             .store(in: &cancellables)
     }
 
-    func photoFavorite(_ photo: Photo?) {
+    func favoritePhoto(_ photo: Photo?) {
         if let i = allPhotos.firstIndex(where: { $0.id == photo?.id }) {
-            allPhotos[i].favorite.toggle()
+            allPhotos[i].favorited.toggle()
         }
     }
 
